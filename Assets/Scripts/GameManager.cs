@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             resource.SetConfig(config);
             obj.SetActive(showResources);
 
-            if (showResources && !resource.isUnlocked)
+            if (showResources && !resource.IsUnlocked)
             {
                 showResources = false;
             }
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         double output = 0;
         foreach (ResourceControl resource in activeResources)
         {
-            if(resource.isUnlocked)
+            if(resource.IsUnlocked)
                 output += resource.GetOutput();
         }
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
         foreach (ResourceControl resource in activeResources)
         {
-            if(resource.isUnlocked)
+            if(resource.IsUnlocked)
                 output += resource.GetOutput();
         }
 
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
         {
             bool isBuyable;
 
-            if (resource.isUnlocked)
+            if (resource.IsUnlocked)
             {
                 isBuyable = totalGold >= resource.GetUpgradeCost();
             }

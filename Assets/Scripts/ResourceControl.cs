@@ -13,13 +13,13 @@ public class ResourceControl : MonoBehaviour
 
     private int level = 1;
 
-    public bool isUnlocked { get; private set; }
+    public bool IsUnlocked { get; private set; }
 
     private void Start()
     {
         resourceButton.onClick.AddListener(() =>
         {
-            if (isUnlocked)
+            if (IsUnlocked)
                 UpgradeLevel();
             else
                 UnlockResource();
@@ -71,12 +71,14 @@ public class ResourceControl : MonoBehaviour
 
         SetUnlocked(true);
         GameManager.Instance.ShowNextResource();
+        
+        AchievementController.Instance.UnlockAchievement(AchievementType.UnlockResource, config.name);
     }
 
     public void SetUnlocked(bool unlocked)
     {
-        isUnlocked = unlocked;
-        resourceImage.color = isUnlocked ? Color.white : Color.grey;
+        IsUnlocked = unlocked;
+        resourceImage.color = IsUnlocked ? Color.white : Color.grey;
         resourceUnlockCost.gameObject.SetActive(!unlocked);
         resourceUpgradeCost.gameObject.SetActive(unlocked);
     }
