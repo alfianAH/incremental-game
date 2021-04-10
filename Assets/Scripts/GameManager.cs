@@ -63,13 +63,34 @@ public class GameManager : MonoBehaviour
 
     private void AddAllResources()
     {
+        bool showResources = true;
+        
         foreach (ResourceConfig config in resourceConfigs)
         {
             GameObject obj = Instantiate(resourcePrefab.gameObject, resourceParent, false);
             ResourceControl resource = obj.GetComponent<ResourceControl>();
             
             resource.SetConfig(config);
+            obj.SetActive(showResources);
+
+            if (showResources && !resource.isUnlocked)
+            {
+                showResources = false;
+            }
+            
             activeResources.Add(resource);
+        }
+    }
+
+    public void ShowNextResource()
+    {
+        foreach (ResourceControl resource in activeResources)
+        {
+            if (!resource.gameObject.activeSelf)
+            {
+                resource.gameObject.SetActive(true);
+                break;
+            }
         }
     }
 
@@ -78,7 +99,8 @@ public class GameManager : MonoBehaviour
         double output = 0;
         foreach (ResourceControl resource in activeResources)
         {
-            output += resource.GetOutput();
+            if(resource.isUnlocked)
+                output += resource.GetOutput();
         }
 
         output *= autoCollectPercentage;
@@ -99,7 +121,8 @@ public class GameManager : MonoBehaviour
 
         foreach (ResourceControl resource in activeResources)
         {
-            output += resource.GetOutput();
+            if(resource.isUnlocked)
+                output += resource.GetOutput();
         }
 
         TapText tapText = GetOrCrateTapText();
@@ -131,7 +154,16 @@ public class GameManager : MonoBehaviour
     {
         foreach (ResourceControl resource in activeResources)
         {
-            bool isBuyable = totalGold >= resource.GetUpgradeCost();
+            bool isBuyable;
+
+            if (resource.isUnlocked)
+            {
+                isBuyable = totalGold >= resource.GetUpgradeCost();
+            }
+            else
+            {
+                isBuyable = totalGold >= resource.GetUnlockCost();
+            }
 
             resource.resourceImage.sprite = resourceSprites[isBuyable ? 1 : 0];
         }

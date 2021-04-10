@@ -13,14 +13,22 @@ public class ResourceControl : MonoBehaviour
 
     private int level = 1;
 
+    public bool isUnlocked { get; private set; }
+
     private void Start()
     {
-        resourceButton.onClick.AddListener(UpgradeLevel);
+        resourceButton.onClick.AddListener(() =>
+        {
+            if (isUnlocked)
+                UpgradeLevel();
+            else
+                UnlockResource();
+        });
     }
 
     public void SetConfig(ResourceConfig configuration)
     {
-        this.config = configuration;
+        config = configuration;
 
         resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
         resourceUnlockCost.text = $"Unlock Cost\n{config.unlockCost}";
@@ -37,6 +45,11 @@ public class ResourceControl : MonoBehaviour
         return config.upgradeCost * level;
     }
 
+    public double GetUnlockCost()
+    {
+        return config.unlockCost;
+    }
+
     public void UpgradeLevel()
     {
         double upgradeCost = GetUpgradeCost();
@@ -48,5 +61,23 @@ public class ResourceControl : MonoBehaviour
 
         resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
         resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
-    } 
+    }
+
+    public void UnlockResource()
+    {
+        double unlockCost = GetUnlockCost();
+        
+        if(GameManager.Instance.TotalGold < unlockCost) return;
+
+        SetUnlocked(true);
+        GameManager.Instance.ShowNextResource();
+    }
+
+    public void SetUnlocked(bool unlocked)
+    {
+        isUnlocked = unlocked;
+        resourceImage.color = isUnlocked ? Color.white : Color.grey;
+        resourceUnlockCost.gameObject.SetActive(!unlocked);
+        resourceUpgradeCost.gameObject.SetActive(unlocked);
+    }
 }
