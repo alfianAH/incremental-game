@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 
     [Range(0, 1)] public float autoCollectPercentage = 0.1f;
     public ResourceConfig[] resourceConfigs;
-
+    public TapText tapTextPrefab;
+    
+    public Transform coinIcon;
     public Transform resourceParent;
     public ResourceControl resourcePrefab;
 
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         autoCollectInfo;
     
     private List<ResourceControl> activeResources = new List<ResourceControl>();
+    private List<TapText> tapTextPool = new List<TapText>();
     private float collectSecond;
     private double totalGold;
 
@@ -46,6 +49,11 @@ public class GameManager : MonoBehaviour
             CollectPerSecond();
             collectSecond = 0f;
         }
+
+        coinIcon.transform.localScale = 
+            Vector3.LerpUnclamped(coinIcon.transform.localScale, Vector3.one * 2f, 0.15f);
+        
+        coinIcon.transform.Rotate(0f, 0f, Time.deltaTime * -100f);
     }
 
     private void AddAllResources()
@@ -78,6 +86,39 @@ public class GameManager : MonoBehaviour
     {
         totalGold += value;
         goldInfo.text = $"Gold: {totalGold:0}";
+    }
+
+    public void CollectByTap(Vector3 tapPosition, Transform parent)
+    {
+        double output = 0;
+
+        foreach (ResourceControl resource in activeResources)
+        {
+            output += resource.GetOutput();
+        }
+
+        TapText tapText = GetOrCrateTapText();
+        tapText.transform.SetParent(parent, false);
+        tapText.transform.position = tapPosition;
+
+        tapText.tapText.text = $"+{output:0}";
+        tapText.gameObject.SetActive(true);
+        coinIcon.transform.localScale = Vector3.one * 1.75f;
+        
+        AddGold(output);
+    }
+
+    private TapText GetOrCrateTapText()
+    {
+        TapText tapText
+            = tapTextPool.Find(t => t.gameObject.activeSelf);
+        if (tapText == null)
+        {
+            tapText = Instantiate((tapTextPrefab)).GetComponent<TapText>();
+            tapTextPool.Add(tapText);
+        }
+
+        return tapText;
     }
 }
 
