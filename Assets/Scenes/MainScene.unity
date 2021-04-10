@@ -847,6 +847,9 @@ MonoBehaviour:
     unlockCost: 0
     upgradeCost: 1
     output: 2
+  resourceSprites:
+  - {fileID: 21300000, guid: 2f7549ee789bfaf44866d7a269a8625a, type: 3}
+  - {fileID: 21300000, guid: e97eab8d99c3cd14caff70243e7b8984, type: 3}
   tapTextPrefab: {fileID: 6624025549802375624, guid: 874d7d144834e584cb06898d7bd916cb,
     type: 3}
   coinIcon: {fileID: 232307818}

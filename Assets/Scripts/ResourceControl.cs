@@ -3,13 +3,20 @@ using UnityEngine.UI;
 
 public class ResourceControl : MonoBehaviour
 {
-    [SerializeField] private Text resourceDescription,
+    public Text resourceDescription,
         resourceUpgradeCost,
         resourceUnlockCost;
+    public Button resourceButton;
+    public Image resourceImage;
 
     private ResourceConfig config;
 
     private int level = 1;
+
+    private void Start()
+    {
+        resourceButton.onClick.AddListener(UpgradeLevel);
+    }
 
     public void SetConfig(ResourceConfig configuration)
     {
@@ -30,8 +37,16 @@ public class ResourceControl : MonoBehaviour
         return config.upgradeCost * level;
     }
 
-    public double GetUnlockCost()
+    public void UpgradeLevel()
     {
-        return config.unlockCost;
-    }
+        double upgradeCost = GetUpgradeCost();
+
+        if (GameManager.Instance.TotalGold < upgradeCost) return;
+
+        GameManager.Instance.AddGold(-upgradeCost);
+        level++;
+
+        resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
+        resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
+    } 
 }
