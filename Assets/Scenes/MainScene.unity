@@ -673,6 +673,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65289bc478fd7d743b3905405cb3ec13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoCollectPercentage: 0.1
+  resourceConfigs:
+  - name: Click
+    unlockCost: 0
+    upgradeCost: 1
+    output: 2
+  resourceParent: {fileID: 1737904392}
+  resourcePrefab: {fileID: 501232458048435716, guid: f9050b6168fa32e4eaccfc734f123671,
+    type: 3}
+  goldInfo: {fileID: 14412414}
+  autoCollectInfo: {fileID: 1648786645}
 --- !u!1 &1014605541
 GameObject:
   m_ObjectHideFlags: 0
