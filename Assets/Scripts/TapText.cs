@@ -3,8 +3,15 @@ using UnityEngine.UI;
 
 public class TapText : MonoBehaviour
 {
-    [SerializeField] private float spawnTime = 0.5f;
+    [SerializeField] private float spawnTimeOrigin = 0.5f;
     public Text tapText;
+
+    private float spawnTime;
+
+    private void OnEnable()
+    {
+        spawnTime = spawnTimeOrigin;
+    }
 
     // Update is called once per frame
     private void Update()

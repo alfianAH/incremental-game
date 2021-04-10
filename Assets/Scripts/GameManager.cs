@@ -111,7 +111,8 @@ public class GameManager : MonoBehaviour
     private TapText GetOrCrateTapText()
     {
         TapText tapText
-            = tapTextPool.Find(t => t.gameObject.activeSelf);
+            = tapTextPool.Find(t => !t.gameObject.activeSelf);
+        
         if (tapText == null)
         {
             tapText = Instantiate((tapTextPrefab)).GetComponent<TapText>();
