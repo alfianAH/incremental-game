@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class AchievementController : MonoBehaviour
 {
     private static AchievementController instance;
-
+    
     public static AchievementController Instance
     {
         get
@@ -38,10 +38,16 @@ public class AchievementController : MonoBehaviour
             popUpTransform.localScale = Vector2.LerpUnclamped(popUpTransform.localScale, Vector2.right, 0.5f);
         }
     }
-
+    
+    /// <summary>
+    /// Unlock new achievement
+    /// </summary>
+    /// <param name="type">The achievement type</param>
+    /// <param name="value">Configuration name</param>
     public void UnlockAchievement(AchievementType type, string value)
     {
-        AchievementData achievement = achievementList.Find(a => a.type == type && a.value == value);
+        AchievementData achievement = achievementList.Find(
+            a => a.type == type && a.value == value);
 
         if (achievement != null && !achievement.isUnlocked)
         {
@@ -49,7 +55,11 @@ public class AchievementController : MonoBehaviour
             ShowAchievementPopUp(achievement);
         }
     }
-
+    
+    /// <summary>
+    /// Show achievement pop up
+    /// </summary>
+    /// <param name="achievement">Achievement data</param>
     private void ShowAchievementPopUp(AchievementData achievement)
     {
         popUpText.text = achievement.title;
