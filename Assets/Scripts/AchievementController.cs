@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditorCustomConfiguration;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,10 +49,33 @@ public class AchievementController : MonoBehaviour
     {
         AchievementData achievement = achievementList.Find(
             a => a.type == type && a.value == value);
+        
+        // If achievement is not null and not unlocked yet, ...
+        if (achievement != null && !achievement.isUnlocked)
+        {
+            // Set achievement is unlocked to true 
+            achievement.isUnlocked = true;
+            // Show achievement pop up
+            ShowAchievementPopUp(achievement);
+        }
+    }
+
+    /// <summary>
+    /// Gold milestone achievement
+    /// </summary>
+    /// <param name="type">The achievement type</param>
+    /// <param name="goldValue">Current gold value</param>
+    public void GoldMilestoneAchievement(AchievementType type, double goldValue)
+    {
+        // Find achievement in achievement list
+        AchievementData achievement = achievementList.Find(
+            a => a.type == type && a.goldValue <= goldValue && !a.isUnlocked);
 
         if (achievement != null && !achievement.isUnlocked)
         {
+            // Set achievement is unlocked to true 
             achievement.isUnlocked = true;
+            // Show achievement pop up
             ShowAchievementPopUp(achievement);
         }
     }
@@ -73,11 +97,18 @@ public class AchievementData
 {
     public string title;
     public AchievementType type;
+    
+    [DrawIf("type", AchievementType.UnlockResource)]
     public string value;
+
+    [DrawIf("type", AchievementType.GoldMilestone)]
+    public double goldValue;
+    
     public bool isUnlocked;
 }
 
 public enum AchievementType
 {
-    UnlockResource
+    UnlockResource,
+    GoldMilestone
 }

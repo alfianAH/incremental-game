@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
         
         CheckResourceCost();
         
+        // Check gold milestone achievement
+        AchievementController.Instance.GoldMilestoneAchievement(
+            AchievementType.GoldMilestone, totalGold);
+        
         // Coin's animation
         coinIcon.transform.localScale = 
             Vector3.LerpUnclamped(coinIcon.transform.localScale, Vector3.one * 2f, 0.15f);

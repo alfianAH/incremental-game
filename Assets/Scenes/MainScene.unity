@@ -1893,26 +1893,52 @@ MonoBehaviour:
   - title: Unlock Intern
     type: 0
     value: Intern
+    goldValue: 0
     isUnlocked: 0
   - title: Unlock Developer
     type: 0
     value: Developer
+    goldValue: 0
     isUnlocked: 0
   - title: Unlock Manager
     type: 0
     value: Manager
+    goldValue: 0
     isUnlocked: 0
   - title: Unlock Boss
     type: 0
     value: Boss
+    goldValue: 0
     isUnlocked: 0
   - title: Unlock President
     type: 0
     value: President
+    goldValue: 0
     isUnlocked: 0
   - title: Unlock God
     type: 0
     value: God
+    goldValue: 0
+    isUnlocked: 0
+  - title: Passed A Hundred Golds
+    type: 1
+    value: 0
+    goldValue: 100
+    isUnlocked: 0
+  - title: Passed A Million Golds
+    type: 1
+    value: 0
+    goldValue: 1000000
+    isUnlocked: 0
+  - title: Passed Ten Million Golds
+    type: 1
+    value: 0
+    goldValue: 10000000
+    isUnlocked: 0
+  - title: Passed A Billion Golds
+    type: 1
+    value: 0
+    goldValue: 1000000000
     isUnlocked: 0
 --- !u!114 &1989007746
 MonoBehaviour:
