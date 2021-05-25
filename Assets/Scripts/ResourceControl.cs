@@ -39,6 +39,8 @@ public class ResourceControl : MonoBehaviour
         resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
         resourceUnlockCost.text = $"Unlock Cost\n{config.unlockCost}";
         resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
+        
+        SetUnlocked(config.unlockCost == 0.0f);
     }
 
     /// <summary>

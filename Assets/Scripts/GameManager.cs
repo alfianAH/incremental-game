@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Text goldInfo,
         autoCollectInfo;
-    
+
+    private AchievementController achievementController;
     private List<ResourceControl> activeResources = new List<ResourceControl>();
     private List<TapText> tapTextPool = new List<TapText>();
     private float collectSecond;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        achievementController = AchievementController.Instance;
         AddAllResources();
     }
 
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
         CheckResourceCost();
         
         // Check gold milestone achievement
-        AchievementController.Instance.GoldMilestoneAchievement(
+        achievementController.GoldMilestoneAchievement(
             AchievementType.GoldMilestone, totalGold);
         
         // Coin's animation
