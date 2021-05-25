@@ -33,15 +33,14 @@ public class GameManager : MonoBehaviour
     private List<ResourceControl> activeResources = new List<ResourceControl>();
     private List<TapText> tapTextPool = new List<TapText>();
     private float collectSecond;
-    private double totalGold;
-
-    public double TotalGold => totalGold;
 
     // Start is called before the first frame update
     private void Start()
     {
         achievementController = AchievementController.Instance;
         AddAllResources();
+
+        goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
     }
 
     // Update is called once per frame
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
         
         // Check gold milestone achievement
         achievementController.GoldMilestoneAchievement(
-            AchievementType.GoldMilestone, totalGold);
+            AchievementType.GoldMilestone, UserDataManager.Progress.gold);
         
         // Coin's animation
         coinIcon.transform.localScale = 
@@ -74,6 +73,7 @@ public class GameManager : MonoBehaviour
     private void AddAllResources()
     {
         bool showResources = true;
+        int index = 0;
         
         foreach (ResourceConfig config in resourceConfigs)
         {
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             ResourceControl resource = obj.GetComponent<ResourceControl>();
             
             // Set resource's configuration
-            resource.SetConfig(config);
+            resource.SetConfig(index, config);
             obj.SetActive(showResources);
             
             // If resource isn't unlocked yet, don't show resources
@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
             
             // Add resource to active resources
             activeResources.Add(resource);
+            index++;
         }
     }
     
@@ -139,8 +140,11 @@ public class GameManager : MonoBehaviour
     /// <param name="value">Value of gold</param>
     public void AddGold(double value)
     {
-        totalGold += value;
-        goldInfo.text = $"Gold: {totalGold:0}";
+        UserDataManager.Progress.gold += value;
+        goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
+        
+        // Save gold
+        UserDataManager.Save();
     }
     
     /// <summary>
@@ -210,11 +214,11 @@ public class GameManager : MonoBehaviour
             // If the resource is unlocked, set isBuyable
             if (resource.IsUnlocked)
             {
-                isBuyable = totalGold >= resource.GetUpgradeCost();
+                isBuyable = UserDataManager.Progress.gold >= resource.GetUpgradeCost();
             }
             else // If the resource isn't unlocked yet, set isBuyable
             {
-                isBuyable = totalGold >= resource.GetUnlockCost();
+                isBuyable = UserDataManager.Progress.gold >= resource.GetUnlockCost();
             }
             
             // Set resource's sprite if it's buyable or not

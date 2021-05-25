@@ -11,7 +11,25 @@ public class ResourceControl : MonoBehaviour
 
     private ResourceConfig config;
 
-    private int level = 1;
+    private int index;
+
+    private int Level
+    {
+        set
+        {
+            // Save set value to the resource's level in progress data
+            UserDataManager.Progress.resourcesLevel[index] = value;
+            UserDataManager.Save();
+        }
+
+        get =>
+            // Check if index is in user's data
+            // If there is no index, return level 1
+            // If there is, return level according to progress data
+            !UserDataManager.HasResources(index) 
+                ? 1 
+                : UserDataManager.Progress.resourcesLevel[index];
+    }
 
     public bool IsUnlocked { get; private set; }
 
@@ -27,20 +45,22 @@ public class ResourceControl : MonoBehaviour
                 UnlockResource();
         });
     }
-    
+
     /// <summary>
     /// Set resource configuration
     /// </summary>
+    /// <param name="index">Resource's index</param>
     /// <param name="configuration">Resource configuration</param>
-    public void SetConfig(ResourceConfig configuration)
+    public void SetConfig(int index, ResourceConfig configuration)
     {
+        this.index = index;
         config = configuration;
 
-        resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
+        resourceDescription.text = $"{config.name} Lv. {Level}\n+{GetOutput():0}";
         resourceUnlockCost.text = $"Unlock Cost\n{config.unlockCost}";
         resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
         
-        SetUnlocked(config.unlockCost == 0.0f);
+        SetUnlocked(config.unlockCost == 0.0f || UserDataManager.HasResources(this.index));
     }
 
     /// <summary>
@@ -49,7 +69,7 @@ public class ResourceControl : MonoBehaviour
     /// <returns>Configuration's output times by level</returns>
     public double GetOutput()
     {
-        return config.output * level;
+        return config.output * Level;
     }
     
     /// <summary>
@@ -58,7 +78,7 @@ public class ResourceControl : MonoBehaviour
     /// <returns>Configuration's upgrade cost times level</returns>
     public double GetUpgradeCost()
     {
-        return config.upgradeCost * level;
+        return config.upgradeCost * Level;
     }
     
     /// <summary>
@@ -78,15 +98,15 @@ public class ResourceControl : MonoBehaviour
         // Check upgrade cost
         double upgradeCost = GetUpgradeCost();
         
-        if (GameManager.Instance.TotalGold < upgradeCost) return;
+        if (UserDataManager.Progress.gold < upgradeCost) return;
         
         // Decrease the gold 
         GameManager.Instance.AddGold(-upgradeCost);
-        level++; // Increase resource's level
+        Level++; // Increase resource's level
         
         // Update resource's UI
         resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
-        resourceDescription.text = $"{config.name} Lv. {level}\n+{GetOutput():0}";
+        resourceDescription.text = $"{config.name} Lv. {Level}\n+{GetOutput():0}";
     }
     
     /// <summary>
@@ -97,7 +117,7 @@ public class ResourceControl : MonoBehaviour
         // Check unlock cost
         double unlockCost = GetUnlockCost();
         
-        if(GameManager.Instance.TotalGold < unlockCost) return;
+        if(UserDataManager.Progress.gold < unlockCost) return;
         
         SetUnlocked(true); // Set is unlock to true
         // Show next level of resource
@@ -113,6 +133,18 @@ public class ResourceControl : MonoBehaviour
     private void SetUnlocked(bool unlocked)
     {
         IsUnlocked = unlocked;
+
+        if (unlocked)
+        {
+            // If new resources is just unlocked and there is not in progress data yet, ...
+            if (!UserDataManager.HasResources(index))
+            {
+                // Add resource level
+                UserDataManager.Progress.resourcesLevel.Add(Level);
+                UserDataManager.Save();
+            }
+        }
+        
         // Set resource's color 
         resourceImage.color = IsUnlocked ? Color.white : Color.grey;
         

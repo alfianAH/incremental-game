@@ -21,6 +21,9 @@ public static class UserDataManager
         else // If there is, ...
         {
             string json = PlayerPrefs.GetString(PROGRESS_KEY);
+            
+            Debug.Log(json);
+            
             Progress = JsonUtility.FromJson<UserProgressData>(json);
         }
     }
@@ -32,5 +35,15 @@ public static class UserDataManager
     {
         string json = JsonUtility.ToJson(Progress);
         PlayerPrefs.SetString(PROGRESS_KEY, json);
+    }
+    
+    /// <summary>
+    /// Check if resources has 
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public static bool HasResources(int index)
+    {
+        return index + 1 <= Progress.resourcesLevel.Count;
     }
 }
