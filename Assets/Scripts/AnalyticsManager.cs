@@ -1,6 +1,6 @@
 using Firebase.Analytics;
 
-public class AnalyticsManager
+public static class AnalyticsManager
 {
     /// <summary>
     /// Event log

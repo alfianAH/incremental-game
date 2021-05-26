@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 using System.Text;
 using Firebase.Storage;
 using UnityEngine;
@@ -33,7 +34,7 @@ public static class UserDataManager
     /// <summary>
     /// Load data from cloud
     /// </summary>
-    /// <param name="onComplete"></param>
+    /// <param name="onComplete">Action on complete</param>
     /// <returns></returns>
     public static IEnumerator LoadFromCloud(Action onComplete)
     {
@@ -81,7 +82,7 @@ public static class UserDataManager
         // Use device ID as file's name which will be saved in cloud
         string deviceId = SystemInfo.deviceUniqueIdentifier;
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-
+        
         return storage.GetReferenceFromUrl($"{storage.RootReference}/{deviceId}");
     }
     
@@ -95,7 +96,7 @@ public static class UserDataManager
 
         if (uploadToCloud)
         {
-            AnalyticsManager.SetUserProperties("gold",progress.gold.ToString());
+            AnalyticsManager.SetUserProperties("gold",progress.gold.ToString(CultureInfo.CurrentCulture));
             
             byte[] data = Encoding.Default.GetBytes(json);
             StorageReference targetStorage = GetTargetCloudStorage();
