@@ -9,7 +9,7 @@ public static class UserDataManager
 {
     private const string PROGRESS_KEY = "Progress";
 
-    public static UserProgressData progress;
+    public static UserProgressData progress = new UserProgressData();
     
     /// <summary>
     /// Load user's progrress data
@@ -20,7 +20,6 @@ public static class UserDataManager
         // If there isn't, make new data
         if (!PlayerPrefs.HasKey(PROGRESS_KEY))
         {
-            progress = new UserProgressData();
             Save(true);
         }
         else // If there is, ...
@@ -50,8 +49,9 @@ public static class UserDataManager
                 string json = Encoding.Default.GetString(task.Result);
                 progress = JsonUtility.FromJson<UserProgressData>(json);
                 isSuccessful = true;
-                isCompleted = true;
             }
+            
+            isCompleted = true;
         });
 
         while (!isCompleted)
