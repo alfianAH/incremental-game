@@ -107,6 +107,9 @@ public class ResourceControl : MonoBehaviour
         // Update resource's UI
         resourceUpgradeCost.text = $"Upgrade Cost\n{GetUpgradeCost()}";
         resourceDescription.text = $"{config.name} Lv. {Level}\n+{GetOutput():0}";
+        
+        // Log upgrade event
+        AnalyticsManager.LogUpgradeEvent(index, Level);
     }
     
     /// <summary>
@@ -124,6 +127,9 @@ public class ResourceControl : MonoBehaviour
         GameManager.Instance.ShowNextResource();
         // Show achievement
         AchievementController.Instance.UnlockAchievement(AchievementType.UnlockResource, config.name);
+        
+        // Log unlock event
+        AnalyticsManager.LogUnlockEvent(index);
     }
     
     /// <summary>
