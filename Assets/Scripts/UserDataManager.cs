@@ -55,7 +55,6 @@ public static class UserDataManager
 
         while (!isCompleted)
         {
-            Debug.Log("Get data");
             yield return null;
         }
         
@@ -96,6 +95,8 @@ public static class UserDataManager
 
         if (uploadToCloud)
         {
+            AnalyticsManager.SetUserProperties("gold",progress.gold.ToString());
+            
             byte[] data = Encoding.Default.GetBytes(json);
             StorageReference targetStorage = GetTargetCloudStorage();
 
