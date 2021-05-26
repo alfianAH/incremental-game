@@ -15,7 +15,7 @@ public class LoadingController : MonoBehaviour
         {
             SetButtonInteractable(false);
             UserDataManager.LoadFromLocal();
-            SceneManager.LoadScene(1);            
+            SceneManager.LoadScene(1);
         });
 
         cloudButton.onClick.AddListener(() =>
