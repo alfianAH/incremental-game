@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     }
 
     [Range(0, 1)] public float autoCollectPercentage = 0.1f;
+    public float saveDelay = 5f;
+    
     public ResourceConfig[] resourceConfigs;
     public Sprite[] resourceSprites;
     public TapText tapTextPrefab;
@@ -32,7 +34,9 @@ public class GameManager : MonoBehaviour
     private AchievementController achievementController;
     private List<ResourceControl> activeResources = new List<ResourceControl>();
     private List<TapText> tapTextPool = new List<TapText>();
+    
     private float collectSecond;
+    private float saveDelayCounter;
 
     // Start is called before the first frame update
     private void Start()
@@ -40,13 +44,16 @@ public class GameManager : MonoBehaviour
         achievementController = AchievementController.Instance;
         AddAllResources();
 
-        goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
+        goldInfo.text = $"Gold: {UserDataManager.progress.gold:0}";
     }
 
     // Update is called once per frame
     private void Update()
     {
-        collectSecond += Time.unscaledDeltaTime;
+        float deltaTime = Time.unscaledDeltaTime;
+        
+        saveDelayCounter -= deltaTime;
+        collectSecond += deltaTime;
 
         if (collectSecond >= 1f)
         {
@@ -58,7 +65,7 @@ public class GameManager : MonoBehaviour
         
         // Check gold milestone achievement
         achievementController.GoldMilestoneAchievement(
-            AchievementType.GoldMilestone, UserDataManager.Progress.gold);
+            AchievementType.GoldMilestone, UserDataManager.progress.gold);
         
         // Coin's animation
         coinIcon.transform.localScale = 
@@ -140,11 +147,16 @@ public class GameManager : MonoBehaviour
     /// <param name="value">Value of gold</param>
     public void AddGold(double value)
     {
-        UserDataManager.Progress.gold += value;
-        goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
+        UserDataManager.progress.gold += value;
+        goldInfo.text = $"Gold: {UserDataManager.progress.gold:0}";
         
-        // Save gold
-        UserDataManager.Save();
+        // Save gold every 5 seconds
+        UserDataManager.Save(saveDelayCounter < 0f);
+
+        if (saveDelayCounter < 0f)
+        {
+            saveDelayCounter = saveDelay;
+        }
     }
     
     /// <summary>
@@ -214,11 +226,11 @@ public class GameManager : MonoBehaviour
             // If the resource is unlocked, set isBuyable
             if (resource.IsUnlocked)
             {
-                isBuyable = UserDataManager.Progress.gold >= resource.GetUpgradeCost();
+                isBuyable = UserDataManager.progress.gold >= resource.GetUpgradeCost();
             }
             else // If the resource isn't unlocked yet, set isBuyable
             {
-                isBuyable = UserDataManager.Progress.gold >= resource.GetUnlockCost();
+                isBuyable = UserDataManager.progress.gold >= resource.GetUnlockCost();
             }
             
             // Set resource's sprite if it's buyable or not

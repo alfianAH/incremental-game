@@ -18,8 +18,8 @@ public class ResourceControl : MonoBehaviour
         set
         {
             // Save set value to the resource's level in progress data
-            UserDataManager.Progress.resourcesLevel[index] = value;
-            UserDataManager.Save();
+            UserDataManager.progress.resourcesLevel[index] = value;
+            UserDataManager.Save(true);
         }
 
         get =>
@@ -28,7 +28,7 @@ public class ResourceControl : MonoBehaviour
             // If there is, return level according to progress data
             !UserDataManager.HasResources(index) 
                 ? 1 
-                : UserDataManager.Progress.resourcesLevel[index];
+                : UserDataManager.progress.resourcesLevel[index];
     }
 
     public bool IsUnlocked { get; private set; }
@@ -98,7 +98,7 @@ public class ResourceControl : MonoBehaviour
         // Check upgrade cost
         double upgradeCost = GetUpgradeCost();
         
-        if (UserDataManager.Progress.gold < upgradeCost) return;
+        if (UserDataManager.progress.gold < upgradeCost) return;
         
         // Decrease the gold 
         GameManager.Instance.AddGold(-upgradeCost);
@@ -117,7 +117,7 @@ public class ResourceControl : MonoBehaviour
         // Check unlock cost
         double unlockCost = GetUnlockCost();
         
-        if(UserDataManager.Progress.gold < unlockCost) return;
+        if(UserDataManager.progress.gold < unlockCost) return;
         
         SetUnlocked(true); // Set is unlock to true
         // Show next level of resource
@@ -140,8 +140,8 @@ public class ResourceControl : MonoBehaviour
             if (!UserDataManager.HasResources(index))
             {
                 // Add resource level
-                UserDataManager.Progress.resourcesLevel.Add(Level);
-                UserDataManager.Save();
+                UserDataManager.progress.resourcesLevel.Add(Level);
+                UserDataManager.Save(true);
             }
         }
         
