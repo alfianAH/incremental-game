@@ -968,6 +968,62 @@ MonoBehaviour:
     type: 3}
   goldInfo: {fileID: 14412414}
   autoCollectInfo: {fileID: 1648786645}
+--- !u!1 &978158609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 978158611}
+  - component: {fileID: 978158610}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &978158610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978158609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2df99daf5d53af43b0470927e6188ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - listSound: 0
+    clip: {fileID: 8300000, guid: 97c2df02f3c185b43960b81467b56bc7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - listSound: 1
+    clip: {fileID: 8300000, guid: 5306548de92ae604590114de06054c8b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  audioSourcePrefab: {fileID: 9206163323426402694, guid: 0989238f37911494987716d023e92445,
+    type: 3}
+--- !u!4 &978158611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978158609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1014605541
 GameObject:
   m_ObjectHideFlags: 0

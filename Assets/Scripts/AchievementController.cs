@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Audio;
 // using UnityEditorCustomConfiguration;
 using UnityEngine;
 using UnityEngine.UI;
@@ -86,6 +87,9 @@ public class AchievementController : MonoBehaviour
     /// <param name="achievement">Achievement data</param>
     private void ShowAchievementPopUp(AchievementData achievement)
     {
+        // Play audio
+        AudioManager.Instance.Play(ListSound.AchievementUnlocked);
+        
         popUpText.text = achievement.title;
         popUpShowDurationCounter = popUpShowDuration;
         popUpTransform.localScale = Vector2.right;

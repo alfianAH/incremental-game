@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -175,6 +176,7 @@ public class GameManager : MonoBehaviour
         coinIcon.transform.localScale = Vector3.one * 1.75f;
         
         AddGold(output);
+        AudioManager.Instance.Play(ListSound.CollectCoin);
     }
     
     /// <summary>
