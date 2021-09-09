@@ -1000,12 +1000,12 @@ MonoBehaviour:
   sounds:
   - listSound: 0
     clip: {fileID: 8300000, guid: 97c2df02f3c185b43960b81467b56bc7, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
   - listSound: 1
     clip: {fileID: 8300000, guid: 5306548de92ae604590114de06054c8b, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
   - listSound: 2
@@ -1015,12 +1015,17 @@ MonoBehaviour:
     loop: 0
   - listSound: 3
     clip: {fileID: 8300000, guid: 4bc628cb1c4632241b2b4e42923d3b77, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
   - listSound: 4
     clip: {fileID: 8300000, guid: 58c080376a4ad9540a34c8077fbdbbe6, type: 3}
     volume: 0.5
+    pitch: 1
+    loop: 0
+  - listSound: 5
+    clip: {fileID: 8300000, guid: aa0440706a1e731468ab333da8d13dad, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
   audioSourcePrefab: {fileID: 9206163323426402694, guid: 0989238f37911494987716d023e92445,

@@ -89,6 +89,9 @@ namespace GamePlay
             }
         
             // Play resource level up audio
+            AudioManager.Instance.Play(config.name == "God"
+                ? ListSound.GodResourceAudio
+                : ListSound.ResourcesLevelUp);
             AudioManager.Instance.Play(ListSound.ResourcesLevelUp);
         
             // Decrease the gold 
@@ -116,8 +119,10 @@ namespace GamePlay
             }
         
             // Play resource unlocked audio
-            AudioManager.Instance.Play(ListSound.ResourcesUnlocked);
-        
+            AudioManager.Instance.Play(config.name == "God"
+                ? ListSound.GodResourceAudio
+                : ListSound.ResourcesUnlocked);
+
             SetUnlocked(true); // Set is unlock to true
             // Show next level of resource
             GameManager.Instance.ShowNextResource();

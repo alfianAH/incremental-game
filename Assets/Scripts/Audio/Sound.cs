@@ -8,7 +8,8 @@ namespace Audio
         AchievementUnlocked,
         ResourcesUnlocked,
         ResourcesLevelUp,
-        ResourcesError
+        ResourcesError,
+        GodResourceAudio
     }
     
     [System.Serializable]
