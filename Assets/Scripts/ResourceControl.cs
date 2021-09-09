@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ResourceControl : MonoBehaviour
@@ -78,7 +79,15 @@ public class ResourceControl : MonoBehaviour
         // Check upgrade cost
         double upgradeCost = GetUpgradeCost();
         
-        if (GameManager.Instance.TotalGold < upgradeCost) return;
+        if (GameManager.Instance.TotalGold < upgradeCost)
+        {
+            // Play resources error audio
+            AudioManager.Instance.Play(ListSound.ResourcesError);
+            return;
+        }
+        
+        // Play resource level up audio
+        AudioManager.Instance.Play(ListSound.ResourcesLevelUp);
         
         // Decrease the gold 
         GameManager.Instance.AddGold(-upgradeCost);
@@ -97,7 +106,15 @@ public class ResourceControl : MonoBehaviour
         // Check unlock cost
         double unlockCost = GetUnlockCost();
         
-        if(GameManager.Instance.TotalGold < unlockCost) return;
+        if(GameManager.Instance.TotalGold < unlockCost)
+        {
+            // Play resources error audio
+            AudioManager.Instance.Play(ListSound.ResourcesError);
+            return;
+        }
+        
+        // Play resource unlocked audio
+        AudioManager.Instance.Play(ListSound.ResourcesUnlocked);
         
         SetUnlocked(true); // Set is unlock to true
         // Show next level of resource

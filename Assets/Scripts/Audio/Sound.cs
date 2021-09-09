@@ -6,6 +6,9 @@ namespace Audio
     {
         CollectCoin,
         AchievementUnlocked,
+        ResourcesUnlocked,
+        ResourcesLevelUp,
+        ResourcesError
     }
     
     [System.Serializable]

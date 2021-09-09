@@ -1008,6 +1008,21 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - listSound: 2
+    clip: {fileID: 8300000, guid: 1a1d8a9619930464da781d14ea3c4bb4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - listSound: 3
+    clip: {fileID: 8300000, guid: 4bc628cb1c4632241b2b4e42923d3b77, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - listSound: 4
+    clip: {fileID: 8300000, guid: 58c080376a4ad9540a34c8077fbdbbe6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
   audioSourcePrefab: {fileID: 9206163323426402694, guid: 0989238f37911494987716d023e92445,
     type: 3}
 --- !u!4 &978158611
