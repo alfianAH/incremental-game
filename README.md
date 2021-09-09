@@ -1,6 +1,6 @@
 ﻿# Incremental Game
 
-A game where player have to upgrade every resource to become rich in game. 
+A game where player have to upgrade every resource to become rich in game. Can you become a God?
 
 Project features:
 1. Canvas UI
