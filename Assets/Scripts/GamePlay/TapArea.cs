@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TapArea : MonoBehaviour, IPointerDownHandler
+namespace GamePlay
 {
-    public void OnPointerDown(PointerEventData eventData)
+    public class TapArea : MonoBehaviour, IPointerDownHandler
     {
-        // On pointer down, collect gold
-        GameManager.Instance.CollectByTap(eventData.position, transform);
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            // On pointer down, collect gold
+            GameManager.Instance.CollectByTap(eventData.position, transform);
+        }
     }
 }
