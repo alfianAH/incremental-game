@@ -61,12 +61,13 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b7fa272c7013cc342994633650e944d5, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -91,5 +92,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8988aff09dc5c4a80c439062ef0fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0.5
+  spawnTimeOrigin: 0.5
   tapText: {fileID: 6624025549802375622}
