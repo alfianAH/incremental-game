@@ -5,21 +5,8 @@ using UnityEngine.UI;
 
 namespace GamePlay
 {
-    public class AchievementController : MonoBehaviour
+    public class AchievementController : SingletonBaseClass<AchievementController>
     {
-        private static AchievementController instance;
-    
-        public static AchievementController Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = FindObjectOfType<AchievementController>();
-
-                return instance;
-            }
-        }
-
         [SerializeField] private Transform popUpTransform;
         [SerializeField] private Text popUpText;
         [SerializeField] private float popUpShowDuration = 3f;

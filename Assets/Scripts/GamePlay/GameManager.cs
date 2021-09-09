@@ -5,21 +5,8 @@ using UnityEngine.UI;
 
 namespace GamePlay
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : SingletonBaseClass<GameManager>
     {
-        private static GameManager instance;
-
-        public static GameManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = FindObjectOfType<GameManager>();
-
-                return instance;
-            }
-        }
-
         [Range(0, 1)] public float autoCollectPercentage = 0.1f;
         public ResourceConfig[] resourceConfigs;
         public Sprite[] resourceSprites;
