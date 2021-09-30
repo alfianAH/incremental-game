@@ -85,8 +85,6 @@ namespace UnityConfig.Editor
                     break;
                 case SerializedPropertyType.BoundsInt:
                     break;
-                case SerializedPropertyType.ManagedReference:
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
