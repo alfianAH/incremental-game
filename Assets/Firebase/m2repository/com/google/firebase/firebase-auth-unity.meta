@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 490209a362098244e9690e399a9525ae
-=======
-guid: 69d17be30200d1a409cfe8578582ddae
->>>>>>> 1a0a8ff (Add Firebase Storage)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
