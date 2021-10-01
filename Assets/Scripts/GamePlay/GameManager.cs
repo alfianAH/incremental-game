@@ -8,6 +8,8 @@ namespace GamePlay
     public class GameManager : SingletonBaseClass<GameManager>
     {
         [Range(0, 1)] public float autoCollectPercentage = 0.1f;
+        public float saveDelay = 5f;
+        
         public ResourceConfig[] resourceConfigs;
         public Sprite[] resourceSprites;
         public TapText tapTextPrefab;
@@ -23,6 +25,7 @@ namespace GamePlay
         private List<ResourceControl> activeResources = new List<ResourceControl>();
         private List<TapText> tapTextPool = new List<TapText>();
         private float collectSecond;
+        private float saveDelayCounter;
 
         // Start is called before the first frame update
         private void Start()
@@ -35,6 +38,9 @@ namespace GamePlay
         // Update is called once per frame
         private void Update()
         {
+            float deltaTime = Time.unscaledDeltaTime;
+        
+            saveDelayCounter -= deltaTime;
             collectSecond += Time.unscaledDeltaTime;
 
             if (collectSecond >= 1f)
@@ -132,8 +138,13 @@ namespace GamePlay
             UserDataManager.progress.gold += value;
             goldInfo.text = $"Gold: {UserDataManager.progress.gold:0}";
             
-            // Save gold
-            UserDataManager.Save();
+            // Save gold every 5 seconds
+            UserDataManager.Save(saveDelayCounter < 0f);
+
+            if (saveDelayCounter < 0f)
+            {
+                saveDelayCounter = saveDelay;
+            }
         }
     
         /// <summary>
