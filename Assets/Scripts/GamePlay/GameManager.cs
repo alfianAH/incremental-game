@@ -29,7 +29,7 @@ namespace GamePlay
         {
             achievementController = AchievementController.Instance;
             AddAllResources();
-            goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
+            goldInfo.text = $"Gold: {UserDataManager.progress.gold:0}";
         }
 
         // Update is called once per frame
@@ -47,7 +47,7 @@ namespace GamePlay
         
             // Check gold milestone achievement
             achievementController.GoldMilestoneAchievement(
-                AchievementType.GoldMilestone, UserDataManager.Progress.gold);
+                AchievementType.GoldMilestone, UserDataManager.progress.gold);
         
             // Coin's animation
             coinIcon.transform.localScale = 
@@ -129,8 +129,8 @@ namespace GamePlay
         /// <param name="value">Value of gold</param>
         public void AddGold(double value)
         {
-            UserDataManager.Progress.gold += value;
-            goldInfo.text = $"Gold: {UserDataManager.Progress.gold:0}";
+            UserDataManager.progress.gold += value;
+            goldInfo.text = $"Gold: {UserDataManager.progress.gold:0}";
             
             // Save gold
             UserDataManager.Save();
@@ -204,11 +204,11 @@ namespace GamePlay
                 // If the resource is unlocked, set isBuyable
                 if (resource.IsUnlocked)
                 {
-                    isBuyable = UserDataManager.Progress.gold >= resource.GetUpgradeCost();
+                    isBuyable = UserDataManager.progress.gold >= resource.GetUpgradeCost();
                 }
                 else // If the resource isn't unlocked yet, set isBuyable
                 {
-                    isBuyable = UserDataManager.Progress.gold >= resource.GetUnlockCost();
+                    isBuyable = UserDataManager.progress.gold >= resource.GetUnlockCost();
                 }
             
                 // Set resource's sprite if it's buyable or not

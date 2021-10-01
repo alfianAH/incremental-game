@@ -21,7 +21,7 @@ namespace GamePlay
             set
             {
                 // Save set value to the resource's level in progress data
-                UserDataManager.Progress.resourcesLevel[index] = value;
+                UserDataManager.progress.resourcesLevel[index] = value;
                 UserDataManager.Save();
             }
 
@@ -31,7 +31,7 @@ namespace GamePlay
                 // If there is, return level according to progress data
                 !UserDataManager.HasResources(index) 
                     ? 1 
-                    : UserDataManager.Progress.resourcesLevel[index];
+                    : UserDataManager.progress.resourcesLevel[index];
         }
 
         public bool IsUnlocked { get; private set; }
@@ -101,7 +101,7 @@ namespace GamePlay
             // Check upgrade cost
             double upgradeCost = GetUpgradeCost();
         
-            if (UserDataManager.Progress.gold < upgradeCost)
+            if (UserDataManager.progress.gold < upgradeCost)
             {
                 // Play resources error audio
                 AudioManager.Instance.Play(ListSound.ResourcesError);
@@ -131,7 +131,7 @@ namespace GamePlay
             // Check unlock cost
             double unlockCost = GetUnlockCost();
         
-            if(UserDataManager.Progress.gold < unlockCost)
+            if(UserDataManager.progress.gold < unlockCost)
             {
                 // Play resources error audio
                 AudioManager.Instance.Play(ListSound.ResourcesError);
@@ -164,7 +164,7 @@ namespace GamePlay
                 if (!UserDataManager.HasResources(index))
                 {
                     // Add resource level
-                    UserDataManager.Progress.resourcesLevel.Add(Level);
+                    UserDataManager.progress.resourcesLevel.Add(Level);
                     UserDataManager.Save();
                 }
             }
