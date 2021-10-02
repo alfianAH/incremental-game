@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
-  <string name="gcm_defaultSenderId" translatable="false">349493700066</string>
-  <string name="google_storage_bucket" translatable="false">dilo-incremental-game.appspot.com</string>
-  <string name="project_id" translatable="false">dilo-incremental-game</string>
-  <string name="google_api_key" translatable="false">AIzaSyAPPq-asMuJEQKKPFfHd8q0OHeOO4CnAhI</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAPPq-asMuJEQKKPFfHd8q0OHeOO4CnAhI</string>
-  <string name="google_app_id" translatable="false">1:349493700066:android:a519ccb2561acaf52945bb</string>
-  <string name="default_web_client_id" translatable="false">349493700066-nqflrmmaid6m5o79r4jo77lo55l2mfk6.apps.googleusercontent.com</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">266897753838</string>
+  <string name="google_storage_bucket" translatable="false">si-agate-incremental-game.appspot.com</string>
+  <string name="project_id" translatable="false">si-agate-incremental-game</string>
+  <string name="google_api_key" translatable="false">AIzaSyBU7XhhaAf6NXL96Tk0b5Ob4vUNOszC9Uo</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBU7XhhaAf6NXL96Tk0b5Ob4vUNOszC9Uo</string>
+  <string name="google_app_id" translatable="false">1:266897753838:android:4d6f6adb0b3d8e3a86d5ff</string>
+  <string name="default_web_client_id" translatable="false">266897753838-3phle6meg40quuiph1n5mn6oa6ft1ab8.apps.googleusercontent.com</string>
 </resources>

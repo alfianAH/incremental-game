@@ -82,6 +82,8 @@ public static class UserDataManager
         // Use device ID as file's name which will be saved in cloud
         string deviceId = SystemInfo.deviceUniqueIdentifier;
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+
+        Debug.Log($"Reference: {storage.RootReference}/{deviceId}");
         
         return storage.GetReferenceFromUrl($"{storage.RootReference}/{deviceId}");
     }
